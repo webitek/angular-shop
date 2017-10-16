@@ -1,20 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { HttpModule, JsonpModule } from "@angular/http";
 
-import { CatalogService } from './catalog/catalog.service'
+import {ProductsService} from "./services/products.service";
 
 import { AppComponent } from './app.component';
-import { CatalogComponent } from './catalog/catalog.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductsListComponent } from './product-list/product-list.component';
+import { ProductsDeleteComponent } from './products-delete/products-delete.component';
+import { ProductsCreateEditComponent } from './products-create-edit/products-create-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CatalogComponent
+    ProductsComponent,
+    ProductsListComponent,
+    ProductsDeleteComponent,
+    ProductsCreateEditComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot([
+          { path: 'products', component: ProductsListComponent},
+          { path: 'products/delete/:id', component: ProductsDeleteComponent },
+          { path: 'products/edit/:id', component: ProductsCreateEditComponent },
+          { path: 'products/create', component: ProductsCreateEditComponent }
+    ])
   ],
-  providers: [CatalogService],
+  providers: [ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

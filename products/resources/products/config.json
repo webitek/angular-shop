@@ -1,21 +1,13 @@
 {
 	"type": "Collection",
 	"properties": {
-		"type": {
-			"name": "type",
-			"type": "string",
-			"typeLabel": "string",
-			"required": false,
-			"id": "type",
-			"order": 0
-		},
 		"name": {
 			"name": "name",
 			"type": "string",
 			"typeLabel": "string",
 			"required": false,
 			"id": "name",
-			"order": 1
+			"order": 0
 		},
 		"price": {
 			"name": "price",
@@ -23,15 +15,7 @@
 			"typeLabel": "number",
 			"required": false,
 			"id": "price",
-			"order": 2
-		},
-		"color": {
-			"name": "color",
-			"type": "array",
-			"typeLabel": "array",
-			"required": false,
-			"id": "color",
-			"order": 3
+			"order": 1
 		}
 	}
 }
