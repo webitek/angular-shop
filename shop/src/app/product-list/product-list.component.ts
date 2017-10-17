@@ -35,6 +35,10 @@ export class ProductsListComponent implements OnInit {
     this.router.navigate(["products", "create"]);
   }
 
+  public addCart(){
+      // this.router.navigate(["cart"]);
+  }
+
   private getProducts(){
     this.service.getProducts().subscribe(
         products => this.products = products,
