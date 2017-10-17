@@ -27,7 +27,11 @@ import { ProductsCreateEditComponent } from './products-create-edit/products-cre
           { path: 'products/delete/:id', component: ProductsDeleteComponent },
           { path: 'products/edit/:id', component: ProductsCreateEditComponent },
           { path: 'products/create', component: ProductsCreateEditComponent }
-    ])
+    ]),
+  FormsModule,
+  ReactiveFormsModule,
+  HttpModule,
+  JsonpModule
   ],
   providers: [ProductsService],
   bootstrap: [AppComponent]

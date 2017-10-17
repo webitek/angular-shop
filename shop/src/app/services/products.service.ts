@@ -67,8 +67,7 @@ export class ProductsService {
       message = error.message ? error.message : error.toString();
     }
 
-    console.log(message);
-
+    // console.log(message);
     return Observable.throw(message);
   }
 
