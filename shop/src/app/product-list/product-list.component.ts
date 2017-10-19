@@ -12,8 +12,9 @@ import { Product } from '../products/product';
 export class ProductsListComponent implements OnInit {
   products: Product[];
   errorMessage: string;
+  counter: number =1;
 
-  constructor(private service: ProductsService, private router: Router) { }
+  constructor(private productService: ProductsService, private router: Router) { }
 
   ngOnInit() {
     this.getProducts();
@@ -21,6 +22,9 @@ export class ProductsListComponent implements OnInit {
 
   public refresh() {
     this.getProducts();
+  }
+  public toCart(){
+    this.router.navigate(["cart",]);
   }
 
   public editProduct(product: Product) {
@@ -35,15 +39,18 @@ export class ProductsListComponent implements OnInit {
     this.router.navigate(["products", "create"]);
   }
 
-  public addCart(){
-      // this.router.navigate(["cart"]);
+  public addCart(product: Product){
+    console.log(product);
+    this.counter++;
+
+    // this.router.navigate(["cart", product]);
+    // this.router.navigate(["cart", {action: product}]);
   }
 
   private getProducts(){
-    this.service.getProducts().subscribe(
+    this.productService.getProducts().subscribe(
         products => this.products = products,
         error => this.errorMessage = error
     )
   }
-
 }

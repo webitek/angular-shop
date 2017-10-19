@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ProductsService {
   private url = "http://localhost:2403/products";
+  private counter: number = 1;
 
   constructor(private http: Http) { }
 
@@ -27,9 +28,9 @@ export class ProductsService {
   }
 
   public addProduct(product: Product) {
-    return this.http.post(this.url, product)
-        .catch(this.handleError);
-  }
+  return this.http.post(this.url, product)
+      .catch(this.handleError);
+}
 
   public updateProduct(product: Product) {
     return this.http.put(this.url + "/" + product.id, product)
@@ -69,6 +70,10 @@ export class ProductsService {
 
     // console.log(message);
     return Observable.throw(message);
+  }
+
+  increment(){
+    return this.counter++;
   }
 
 }

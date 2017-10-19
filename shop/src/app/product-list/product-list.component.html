@@ -3,6 +3,7 @@
 <p>
   <button class="btn btn-primary" (click)="createProduct()">Create</button>
   <button class="btn btn-default" (click)="refresh()">Refresh</button>
+  <button class="btn btn-default" (click)="toCart()">To cart</button>
 </p>
 <div *ngIf="errorMessage" class="alert alert-danger">
   {{errorMessage}}
@@ -12,8 +13,9 @@
     <th>Name</th>
     <th>Price</th>
     <th></th>
+    <th></th>
   </tr>
-  <tr *ngFor="let product of products">
+  <tr *ngFor="let product of products;">
     <td>
       {{product.name}}
     </td>
@@ -25,5 +27,6 @@
       <button class="btn btn-default" (click)="deleteProduct(product)">Delete</button>
       <button class="btn btn-default" (click)="addCart(product)">Add cart</button>
     </td>
+    <td>{{counter}}</td>
   </tr>
 </table>

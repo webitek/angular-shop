@@ -5,6 +5,7 @@ import { RouterModule } from "@angular/router";
 import { HttpModule, JsonpModule } from "@angular/http";
 
 import { ProductsService } from "./services/products.service";
+import { CartService } from "./cart/cart.service";
 
 import { AppComponent } from './app.component';
 import { ProductsComponent } from './products/products.component';
@@ -12,6 +13,7 @@ import { ProductsListComponent } from './product-list/product-list.component';
 import { ProductsDeleteComponent } from './products-delete/products-delete.component';
 import { ProductsCreateEditComponent } from './products-create-edit/products-create-edit.component';
 import { CartListComponent } from './cart/cart-list/cart-list.component';
+
 
 
 @NgModule({
@@ -38,7 +40,7 @@ import { CartListComponent } from './cart/cart-list/cart-list.component';
     HttpModule,
     JsonpModule
   ],
-  providers: [ProductsService],
+  providers: [ProductsService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

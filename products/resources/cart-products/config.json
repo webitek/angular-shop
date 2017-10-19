@@ -16,6 +16,14 @@
 			"required": false,
 			"id": "price",
 			"order": 1
+		},
+		"count": {
+			"name": "count",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "count",
+			"order": 2
 		}
 	}
 }
