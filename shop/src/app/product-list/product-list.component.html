@@ -27,6 +27,6 @@
       <button class="btn btn-default" (click)="deleteProduct(product)">Delete</button>
       <button class="btn btn-default" (click)="addCart(product)">Add cart</button>
     </td>
-    <td>{{counter}}</td>
+    <td>{{counter[product.id]? counter[product.id]: ''}}</td>
   </tr>
 </table>

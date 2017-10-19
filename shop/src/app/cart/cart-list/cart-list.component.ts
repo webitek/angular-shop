@@ -27,13 +27,10 @@ export class CartListComponent implements OnInit {
 
   private getProducts(){
     this.service.getProducts().subscribe(
-        // function(response) { console.log("Success Response" + response)},
-        // function(error) { console.log("Error happened" + error)},
-        // function() { console.log("the subscription is completed")},
         products => {
           products.forEach((item)=>{
             // item.id = 0;
-            console.log(item);
+            // console.log(item);
           })
           return this.products = products
         },

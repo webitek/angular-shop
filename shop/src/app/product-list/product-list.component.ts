@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../products/product';
+import { CartProduct } from "../cart/cart-products";
 
 
 @Component({
@@ -12,7 +13,8 @@ import { Product } from '../products/product';
 export class ProductsListComponent implements OnInit {
   products: Product[];
   errorMessage: string;
-  counter: number =1;
+  counter: object = {};
+  order: CartProduct[] = [];
 
   constructor(private productService: ProductsService, private router: Router) { }
 
@@ -38,13 +40,28 @@ export class ProductsListComponent implements OnInit {
   public createProduct(){
     this.router.navigate(["products", "create"]);
   }
-
   public addCart(product: Product){
-    console.log(product);
-    this.counter++;
 
-    // this.router.navigate(["cart", product]);
-    // this.router.navigate(["cart", {action: product}]);
+    this.counter[product.id]
+        ?this.counter[product.id]++
+        :this.counter[product.id] = 1;
+
+
+    if (this.order.find(item => item.id == product.id)) {
+      this.order[this.order.findIndex(item => item.id == product.id)].count++;
+    } else {
+      let newOrder = {
+          'id': product.id,
+          'name': product.name,
+          'price': product.price,
+          'count': this.counter[product.id]? this.counter[product.id]: 0
+      };
+      this.order.push(newOrder);
+      this.productService.addCartProduct(newOrder).subscribe(
+          () => console.log('add'),
+          error => this.errorMessage = error
+      );;
+    }
   }
 
   private getProducts(){

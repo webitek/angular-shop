@@ -5,10 +5,12 @@ import { Product } from '../products/product';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import {CartProduct} from "../cart/cart-products";
 
 @Injectable()
 export class ProductsService {
   private url = "http://localhost:2403/products";
+  private urlCart = "http://localhost:2403/cart-products";
   private counter: number = 1;
 
   constructor(private http: Http) { }
@@ -28,9 +30,15 @@ export class ProductsService {
   }
 
   public addProduct(product: Product) {
-  return this.http.post(this.url, product)
-      .catch(this.handleError);
-}
+    return this.http.post(this.url, product)
+        .catch(this.handleError);
+  }
+
+  public addCartProduct(product: CartProduct) {
+      console.log(product);
+      return this.http.post(this.urlCart, {name: product.name, price: product.price, count: product.count})
+          .catch(this.handleError);
+  }
 
   public updateProduct(product: Product) {
     return this.http.put(this.url + "/" + product.id, product)
