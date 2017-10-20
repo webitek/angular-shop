@@ -13,6 +13,7 @@ import { ProductsListComponent } from './product-list/product-list.component';
 import { ProductsDeleteComponent } from './products-delete/products-delete.component';
 import { ProductsCreateEditComponent } from './products-create-edit/products-create-edit.component';
 import { CartListComponent } from './cart/cart-list/cart-list.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 
@@ -24,6 +25,7 @@ import { CartListComponent } from './cart/cart-list/cart-list.component';
     ProductsDeleteComponent,
     ProductsCreateEditComponent,
     CartListComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

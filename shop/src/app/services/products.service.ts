@@ -35,9 +35,13 @@ export class ProductsService {
   }
 
   public addCartProduct(product: CartProduct) {
-      console.log(product);
       return this.http.post(this.urlCart, {name: product.name, price: product.price, count: product.count})
           .catch(this.handleError);
+  }
+
+  public updateCartProduct(product: CartProduct) {
+    return this.http.put(this.urlCart + "/" + product.id, product)
+        .catch(this.handleError);
   }
 
   public updateProduct(product: Product) {
@@ -75,13 +79,7 @@ export class ProductsService {
     } else{
       message = error.message ? error.message : error.toString();
     }
-
-    // console.log(message);
     return Observable.throw(message);
-  }
-
-  increment(){
-    return this.counter++;
   }
 
 }

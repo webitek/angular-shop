@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../products/product';
 import { CartProduct } from "../cart/cart-products";
+import {count} from "rxjs/operator/count";
+import {error} from "util";
 
 
 @Component({
@@ -48,7 +50,20 @@ export class ProductsListComponent implements OnInit {
 
 
     if (this.order.find(item => item.id == product.id)) {
+
+      let newOrder = {
+        'id': product.id,
+        'name': product.name,
+        'price': product.price,
+        'count': this.counter[product.id]? this.counter[product.id]: 0
+      };
+
       this.order[this.order.findIndex(item => item.id == product.id)].count++;
+
+      this.productService.updateCartProduct(newOrder).subscribe(
+          () => console.log('update'),
+          error => this.errorMessage = error
+      );
     } else {
       let newOrder = {
           'id': product.id,
@@ -60,8 +75,9 @@ export class ProductsListComponent implements OnInit {
       this.productService.addCartProduct(newOrder).subscribe(
           () => console.log('add'),
           error => this.errorMessage = error
-      );;
+      );
     }
+    console.log(this.order);
   }
 
   private getProducts(){
