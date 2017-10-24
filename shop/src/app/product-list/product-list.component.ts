@@ -22,10 +22,17 @@ export class ProductsListComponent implements OnInit {
   counter: object = {};
   order: CartProduct[] = [];
 
+  public productsPerPage = 4;
+  public selectedPage = 1;
+
 
   constructor(private productService: ProductsService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
+    this.productService.getProducts().subscribe(
+        products => this.products = products,
+        error => this.errorMessage = error
+    );
     this.getProducts();
   }
 
@@ -52,7 +59,6 @@ export class ProductsListComponent implements OnInit {
     this.counter[product.id]
         ?this.counter[product.id]++
         :this.counter[product.id] = 1;
-
 
     if (this.order.find(item => item.id == product.id)) {
 
@@ -82,17 +88,38 @@ export class ProductsListComponent implements OnInit {
           error => this.errorMessage = error
       );
     }
-    console.log(this.order);
   }
 
   private getProducts(){
-    this.productService.getProducts().subscribe(
+    if(this.products){
+        let pageIndex = (this.selectedPage - 1)  * this.productsPerPage;
+        return this.products.slice(pageIndex, pageIndex + this.productsPerPage)
+    }
+    /*this.productService.getProducts().subscribe(
         products => this.products = products,
         error => this.errorMessage = error
-    )
+    )*/
   }
 
   toAdmin(){
     this.router.navigate(["/admin"]);
+  }
+
+  changePage (newPage: number){
+      this.selectedPage = newPage;
+  }
+
+  changePageSize(newSize: number){
+      this.productsPerPage = Number(newSize);
+      this.changePage(1);
+  }
+
+  getPageNumbers(): number[] {
+      if(this.products){
+          return Array(Math.ceil(this.products.length / this.productsPerPage))
+              .fill(0)
+              .map((x,i) => i + 1);
+      }
+
   }
 }
