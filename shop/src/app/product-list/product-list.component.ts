@@ -5,6 +5,10 @@ import { Product } from '../products/product';
 import { CartProduct } from "../cart/cart-products";
 import {count} from "rxjs/operator/count";
 import {error} from "util";
+import {AuthService} from "../services/auth.service";
+
+declare var jquery:any;
+declare var $ :any;
 
 
 @Component({
@@ -18,7 +22,8 @@ export class ProductsListComponent implements OnInit {
   counter: object = {};
   order: CartProduct[] = [];
 
-  constructor(private productService: ProductsService, private router: Router) { }
+
+  constructor(private productService: ProductsService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
     this.getProducts();
@@ -85,5 +90,9 @@ export class ProductsListComponent implements OnInit {
         products => this.products = products,
         error => this.errorMessage = error
     )
+  }
+
+  toAdmin(){
+    this.router.navigate(["/admin"]);
   }
 }
